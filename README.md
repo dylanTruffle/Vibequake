@@ -1,52 +1,37 @@
-# Vibequake Documentation
+# Vibequake API Documentation
 
-Welcome to the Vibequake documentation site! This is the GitHub Pages branch that serves the documentation for the Vibequake library.
+This is the GitHub Pages branch that serves the Swagger documentation for the Vibequake API.
 
-## 🌊 About Vibequake
+## 📚 API Documentation
 
-Vibequake is a comprehensive Python library for analyzing vibrational data, detecting resonance conditions, and predicting catastrophic failure in mechanical systems.
+The interactive API documentation is available at the root of this site.
 
-**When objects vibe too hard, they can undergo resonance and catastrophic failure.**
+### Features
 
-## 📚 Documentation
+- **Interactive API Explorer**: Test API endpoints directly from the browser
+- **Request/Response Examples**: See example requests and responses
+- **Schema Documentation**: Complete OpenAPI schema documentation
+- **Try It Out**: Execute API calls directly from the documentation
 
-The main documentation is available at: [https://vibequake.dev](https://vibequake.dev)
+### API Endpoints
 
-### Quick Links
+The Vibequake API provides the following main endpoints:
 
-- **Installation**: `pip install vibequake`
-- **GitHub Repository**: [https://github.com/vibequake/vibequake](https://github.com/vibequake/vibequake)
-- **PyPI Package**: [https://pypi.org/project/vibequake/](https://pypi.org/project/vibequake/)
-- **Issues**: [https://github.com/vibequake/vibequake/issues](https://github.com/vibequake/vibequake/issues)
+- `POST /analyze/resonance` - Analyze vibration data for resonance conditions
+- `POST /predict/failure` - Predict catastrophic failure based on vibration analysis
+- `POST /analyze/complete` - Complete analysis with both resonance and failure prediction
+- `POST /visualize/spectrum` - Generate vibration spectrum visualization
+- `POST /visualize/resonance` - Generate detailed resonance analysis plots
+- `POST /upload/analyze` - Upload and analyze vibration data files
+- `GET /sample/generate` - Generate sample vibration data for testing
+- `GET /health` - Health check endpoint
 
-## 🚀 Quick Start
+### Usage
 
-```python
-import vibequake as vq
-
-# Generate sample data
-data = vq.generate_sample_data(
-    duration=10.0,
-    sampling_freq=1000.0,
-    resonant_freqs=[50, 120, 300],
-    noise_level=0.1
-)
-
-# Analyze for resonance
-analyzer = vq.ResonanceAnalyzer()
-resonance_result = analyzer.analyze(data)
-
-# Predict failure
-predictor = vq.FailurePredictor()
-prediction = predictor.predict(data, resonance_result)
-
-print(f"Detected {len(resonance_result.resonant_frequencies)} resonant frequencies")
-print(f"Failure probability: {prediction.failure_probability:.2%}")
-```
-
-## 📖 Full Documentation
-
-For complete documentation, API reference, and examples, please visit the main documentation site or check out the GitHub repository.
+1. Visit the documentation site
+2. Explore the available endpoints
+3. Use the "Try it out" feature to test API calls
+4. View request/response schemas and examples
 
 ---
 

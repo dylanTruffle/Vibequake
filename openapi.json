@@ -1,0 +1,510 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "Vibequake API",
+    "description": "# Vibequake: Vibrational Resonance Analysis and Failure Prediction API\n\nA comprehensive API for analyzing vibrational data, detecting resonance conditions, and predicting catastrophic failure in mechanical systems.\n\n## Features\n\n- **Resonance Analysis**: Detect resonant frequencies and assess risk levels\n- **Failure Prediction**: Predict probability and timing of catastrophic failure\n- **Data Visualization**: Generate plots and visualizations\n- **Multiple Formats**: Support for CSV, JSON, and other data formats\n- **Real-time Analysis**: Process vibration data in real-time\n\n## Quick Start\n\n1. Upload your vibration data or use the sample data generator\n2. Run resonance analysis to detect problematic frequencies\n3. Get failure predictions and recommendations\n4. Download visualizations and reports\n\n## Use Cases\n\n- Industrial machinery monitoring\n- Structural health monitoring\n- Predictive maintenance\n- Quality control in manufacturing\n- Research and development\n\nFor more information, visit [https://vibequake.dev](https://vibequake.dev)",
+    "version": "0.1.0",
+    "contact": {
+      "name": "Vibequake Team",
+      "email": "team@vibequake.dev",
+      "url": "https://vibequake.dev"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8000",
+      "description": "Development server"
+    }
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "summary": "Root",
+        "description": "Root endpoint with API information.",
+        "responses": {
+          "200": {
+            "description": "Basic API information and links",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "version": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "documentation": {
+                      "type": "string"
+                    },
+                    "health_check": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "summary": "Health Check",
+        "description": "Health check endpoint.",
+        "responses": {
+          "200": {
+            "description": "Service health status",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/analyze/resonance": {
+      "post": {
+        "summary": "Analyze Resonance",
+        "description": "Analyze vibration data for resonance conditions.\n\nThis endpoint performs a comprehensive resonance analysis on the provided vibration data, detecting resonant frequencies, calculating quality factors, and assessing risk levels.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResonanceAnalysisRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Resonance analysis results with detected frequencies and risk assessment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResonanceAnalysisResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "If data is invalid or analysis fails"
+          }
+        }
+      }
+    },
+    "/predict/failure": {
+      "post": {
+        "summary": "Predict Failure",
+        "description": "Predict catastrophic failure based on vibration analysis.\n\nThis endpoint analyzes vibration data and resonance results to predict the probability and timing of catastrophic failure, providing actionable recommendations for risk mitigation.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FailurePredictionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Failure prediction with probability, timing, and recommendations",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FailurePredictionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "If data is invalid or prediction fails"
+          }
+        }
+      }
+    },
+    "/analyze/complete": {
+      "post": {
+        "summary": "Complete Analysis",
+        "description": "Perform complete analysis including resonance detection and failure prediction.\n\nThis endpoint combines resonance analysis and failure prediction in a single request, providing comprehensive results for vibration data analysis.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VibrationDataRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Complete analysis results including resonance and failure prediction"
+          },
+          "400": {
+            "description": "If analysis fails"
+          }
+        }
+      }
+    },
+    "/visualize/spectrum": {
+      "post": {
+        "summary": "Generate Spectrum Plot",
+        "description": "Generate vibration spectrum visualization.\n\nThis endpoint creates a comprehensive visualization of the vibration data including time domain, frequency domain, statistics, and risk assessment.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VibrationDataRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Base64 encoded PNG image of the spectrum plot"
+          },
+          "400": {
+            "description": "If visualization fails"
+          }
+        }
+      }
+    },
+    "/visualize/resonance": {
+      "post": {
+        "summary": "Generate Resonance Plot",
+        "description": "Generate detailed resonance analysis visualization.\n\nThis endpoint creates specialized plots for resonance analysis including power spectrum with peaks, quality factors, and risk distribution.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResonanceAnalysisRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Base64 encoded PNG image of the resonance analysis plot"
+          },
+          "400": {
+            "description": "If visualization fails"
+          }
+        }
+      }
+    },
+    "/upload/analyze": {
+      "post": {
+        "summary": "Upload and Analyze",
+        "description": "Upload vibration data file and perform analysis.\n\nThis endpoint accepts file uploads in various formats (CSV, JSON, etc.) and performs the requested type of analysis.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "Vibration data file (CSV, JSON, etc.)"
+                  },
+                  "analysis_type": {
+                    "type": "string",
+                    "description": "Type of analysis: 'resonance', 'failure', or 'complete'",
+                    "default": "complete"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Analysis results based on the requested type"
+          },
+          "400": {
+            "description": "If file upload or analysis fails"
+          }
+        }
+      }
+    },
+    "/sample/generate": {
+      "get": {
+        "summary": "Generate Sample Data",
+        "description": "Generate sample vibration data for testing and demonstration.\n\nThis endpoint creates synthetic vibration data with specified parameters for testing and demonstration purposes.",
+        "parameters": [
+          {
+            "name": "duration",
+            "in": "query",
+            "description": "Duration of the signal in seconds",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "default": 10.0
+            }
+          },
+          {
+            "name": "sampling_freq",
+            "in": "query",
+            "description": "Sampling frequency in Hz",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "default": 1000.0
+            }
+          },
+          {
+            "name": "resonant_freqs",
+            "in": "query",
+            "description": "Comma-separated list of resonant frequencies",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "50,120,300"
+            }
+          },
+          {
+            "name": "noise_level",
+            "in": "query",
+            "description": "Level of noise to add",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "default": 0.1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sample vibration data in JSON format"
+          },
+          "400": {
+            "description": "If generation fails"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "VibrationDataRequest": {
+        "type": "object",
+        "required": [
+          "time",
+          "amplitude",
+          "frequency"
+        ],
+        "properties": {
+          "time": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            },
+            "description": "Time array in seconds"
+          },
+          "amplitude": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            },
+            "description": "Vibration amplitude array"
+          },
+          "frequency": {
+            "type": "number",
+            "description": "Sampling frequency in Hz"
+          },
+          "units": {
+            "type": "string",
+            "default": "m/s\u00b2",
+            "description": "Units of amplitude"
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Additional metadata"
+          }
+        }
+      },
+      "ResonanceAnalysisRequest": {
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/VibrationDataRequest"
+          },
+          "min_peak_height": {
+            "type": "number",
+            "default": 0.1,
+            "description": "Minimum peak height relative to max amplitude"
+          },
+          "min_peak_distance": {
+            "type": "number",
+            "default": 1.0,
+            "description": "Minimum distance between peaks in Hz"
+          },
+          "prominence_threshold": {
+            "type": "number",
+            "default": 0.05,
+            "description": "Minimum peak prominence for detection"
+          }
+        }
+      },
+      "FailurePredictionRequest": {
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/VibrationDataRequest"
+          },
+          "resonance_result": {
+            "type": "object",
+            "description": "Pre-computed resonance results"
+          },
+          "failure_threshold": {
+            "type": "number",
+            "default": 0.8,
+            "description": "Threshold for failure probability"
+          }
+        }
+      },
+      "ResonanceAnalysisResponse": {
+        "type": "object",
+        "required": [
+          "resonant_frequencies",
+          "resonance_peaks",
+          "quality_factors",
+          "resonance_risk",
+          "statistics",
+          "risk_summary"
+        ],
+        "properties": {
+          "resonant_frequencies": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            },
+            "description": "Detected resonant frequencies in Hz"
+          },
+          "resonance_peaks": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            },
+            "description": "Peak amplitudes at resonant frequencies"
+          },
+          "quality_factors": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            },
+            "description": "Quality factors (Q) for each resonance"
+          },
+          "resonance_risk": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Risk level for each resonance"
+          },
+          "statistics": {
+            "type": "object",
+            "description": "Analysis statistics"
+          },
+          "risk_summary": {
+            "type": "object",
+            "description": "Summary of risk levels"
+          }
+        }
+      },
+      "FailurePredictionResponse": {
+        "type": "object",
+        "required": [
+          "failure_probability",
+          "failure_mode",
+          "confidence",
+          "risk_factors",
+          "recommendations",
+          "severity_level"
+        ],
+        "properties": {
+          "failure_probability": {
+            "type": "number",
+            "description": "Probability of failure (0-1)"
+          },
+          "time_to_failure": {
+            "type": "number",
+            "nullable": true,
+            "description": "Estimated time to failure in hours"
+          },
+          "failure_mode": {
+            "type": "string",
+            "description": "Predicted failure mode"
+          },
+          "confidence": {
+            "type": "number",
+            "description": "Confidence level in the prediction (0-1)"
+          },
+          "risk_factors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Contributing risk factors"
+          },
+          "recommendations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Recommendations to mitigate risk"
+          },
+          "severity_level": {
+            "type": "string",
+            "description": "Overall severity level"
+          }
+        }
+      },
+      "HealthResponse": {
+        "type": "object",
+        "required": [
+          "status",
+          "version",
+          "timestamp"
+        ],
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Service status"
+          },
+          "version": {
+            "type": "string",
+            "description": "API version"
+          },
+          "timestamp": {
+            "type": "string",
+            "description": "Current timestamp"
+          }
+        }
+      }
+    }
+  }
+}
