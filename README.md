@@ -4,7 +4,6 @@ When objects vibe too hard, they can undergo resonance and catastrophic failure.
 
 [![PyPI version](https://badge.fury.io/py/vibequake.svg)](https://badge.fury.io/py/vibequake)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Documentation](https://img.shields.io/badge/docs-vibequake.dev-blue.svg)](https://vibequake.dev)
 
 A comprehensive Python library for analyzing vibrational data, detecting resonance conditions, and predicting catastrophic failure in mechanical systems.
